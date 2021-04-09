@@ -1,0 +1,17 @@
+  const addBlog = async (blogObject) => {
+    try {
+      const savedBlog = await blogService.create(blogObject)
+      setMessage(`a new blog ${savedBlog.title} by ${savedBlog.author}`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+      setBlogs(blogs.concat(savedBlog))
+    } catch (error) {
+      const errMsg = error.response.data.error
+      console.log(errMsg)
+      setErrorMessage(errMsg)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
